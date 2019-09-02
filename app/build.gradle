@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "lus.areapass"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "0.0.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+//    TODO: Enable Parcelable annotation
+//    androidExtensions {
+//        experimental = true
+//    }
+}
+
+def dagger_version = '2.23.1'
+def dagger_assisted_inject_version = '0.4.0'
+def retrofit_version = '2.6.0'
+def moshi_version = '1.8.0'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Views
+//    implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    // Kotlin SDK
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.2.0-alpha02'
+
+    // Kotlin extensions
+    implementation 'androidx.fragment:fragment-ktx:1.2.0-alpha01'
+    implementation "androidx.activity:activity-ktx:1.1.0-alpha01"
+
+    // Jetpack Components
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+
+    // DI
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:$dagger_assisted_inject_version"
+    kapt "com.squareup.inject:assisted-inject-processor-dagger2:$dagger_assisted_inject_version"
+
+    // Network
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+
+    // Tests
+    testImplementation 'junit:junit:4.13-beta-3'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Cache
+    implementation 'com.cocosw:favor:0.2.0@aar'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+}
