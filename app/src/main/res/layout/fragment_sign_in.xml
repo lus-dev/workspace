@@ -20,14 +20,12 @@
         <LinearLayout
             android:id="@+id/logo"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             app:layout_constraintBottom_toTopOf="@id/form"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread"
-            app:layout_constraintVertical_weight="0.1">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView style="@style/Logo" />
 
@@ -36,13 +34,13 @@
         <LinearLayout
             android:id="@+id/form"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingBottom="20dp"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@id/logo"
-            app:layout_constraintVertical_weight="0.20">
+            app:layout_constraintTop_toBottomOf="@id/logo">
 
             <EditText
                 style="@style/InputField.Auth"
@@ -54,7 +52,7 @@
 
             <EditText
                 style="@style/InputField.Auth"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hint_password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
@@ -70,12 +68,12 @@
                 android:onClick="@{viewModel.onSignIn}"
                 android:text="@string/button_sign_in"
                 android:textAllCaps="false"
-                android:textColor="#171522" />
+                android:textColor="@color/dark_blue" />
 
             <TextView
                 style="@style/Label.Auth"
                 android:layout_width="150dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:onClick="@{viewModel.onCreateAccount}"
                 android:text="@string/button_create_account" />
 

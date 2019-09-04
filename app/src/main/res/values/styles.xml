@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
-        <item name="colorAccent">@color/blurred_blue</item>
+        <item name="colorAccent">@color/dark_blue</item>
     </style>
 
     <style name="InputField">
@@ -40,21 +40,22 @@
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">125dp</item>
         <item name="android:layout_marginTop">15dp</item>
-        <item name="android:src">@drawable/logo</item>
+        <item name="android:src">@drawable/img_logo</item>
     </style>
 
     <style name="Scroll">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:fillViewport">true</item>
-        <!--<item name="android:background">@drawable/form_bgd_auth</item>-->
         <item name="android:overScrollMode">never</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
     </style>
 
     <style name="Dialog" parent="Theme.AppCompat.Light.Dialog.Alert" />
 
     <style name="Dialog.Error">
-        <item name="android:windowBackground">@drawable/form_bgd_error</item>
+        <item name="android:windowBackground">@drawable/upd_form_bgd_error</item>
         <item name="android:windowMinWidthMinor">75%</item>
     </style>
 

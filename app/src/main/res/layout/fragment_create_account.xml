@@ -19,7 +19,7 @@
         android:paddingStart="55dp"
         android:paddingEnd="55dp"
         android:paddingBottom="20dp"
-        tools:background="@drawable/form_bgd_auth">
+        tools:background="@drawable/upd_form_bgd_auth">
 
         <ImageView
             android:id="@+id/logo"
@@ -95,10 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:buttonTint="@color/dark_blue"
+                android:buttonTint="@color/yellow"
                 android:checked="@={viewModel.usePromoCode}"
                 android:text="@string/button_use_promo_code"
-                android:textColor="@color/dark_blue" />
+                android:textColor="@android:color/white" />
 
             <EditText
                 style="@style/InputField.Auth"
@@ -115,11 +115,11 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/button_bgd_signin"
+                android:background="@drawable/upd_button_bgd_signin"
                 android:onClick="@{viewModel.onSubmit}"
                 android:text="@string/button_submit"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/dark_blue" />
 
         </LinearLayout>
 
