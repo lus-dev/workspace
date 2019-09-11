@@ -8,11 +8,15 @@ class UserPreferences constructor(private val storage: UserFieldStorage) {
 
     fun save(data: User) {
         storage.id = data.id
+        storage.firstName = data.firstName
+        storage.lastName = data.lastName
     }
 
     fun load() : User {
         val data = User()
         data.id = storage.id
+        data.firstName = storage.firstName
+        data.lastName = storage.lastName
         return data
     }
 
@@ -21,7 +25,7 @@ class UserPreferences constructor(private val storage: UserFieldStorage) {
 @AllFavor
 interface UserFieldStorage {
 
-    var id: Int?
+    var id: Long?
     var firstName: String?
     var lastName: String?
     var hasPromoCode: Boolean

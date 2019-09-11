@@ -12,4 +12,12 @@ object Bindings {
         view.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
+    @JvmStatic
+    @BindingAdapter("background")
+    fun setBackground(view: View, resId: Int) {
+        if (resId != 0) {
+            view.setBackgroundResource(resId)
+        }
+    }
+
 }

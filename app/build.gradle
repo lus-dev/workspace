@@ -10,7 +10,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "0.0.1"
+        versionName "0.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -42,6 +42,9 @@ dependencies {
 
     // Views
 //    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'eu.davidea:flexible-adapter:5.1.0'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:3.1.1'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.1.1'
 
     // Kotlin SDK
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -77,4 +80,7 @@ dependencies {
     // Cache
     implementation 'com.cocosw:favor:0.2.0@aar'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    // Date-time
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 }

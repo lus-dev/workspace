@@ -1,6 +1,7 @@
 package lus.areapass
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import lus.areapass.di.DaggerApplicationComponent
 import lus.areapass.di.InjectorProvider
 
@@ -11,4 +12,8 @@ class AreaPassApplication : Application(), InjectorProvider {
         DaggerApplicationComponent.factory().create(applicationContext)
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
+    }
 }

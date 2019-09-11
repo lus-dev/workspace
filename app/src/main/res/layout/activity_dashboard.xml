@@ -4,42 +4,149 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="navigator"
+            type="lus.areapass.dashboard.viewmodels.DashboardViewModel" />
+
+    </data>
+
     <androidx.core.widget.NestedScrollView style="@style/Scroll">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/form_bgd_auth"
-            android:paddingStart="15dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="15dp"
+            android:orientation="vertical"
             tools:context=".dashboard.DashboardActivity">
 
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="User: Sasha Lysenko"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <include
+                layout="@layout/layout_toolbar"
+                bind:navigator="@{navigator}" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Trial remains: 10 days"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/username" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{navigator.username}"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Sasha Lysenko" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{navigator.trial}"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Trial remains: 10 days" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toTopOf="@id/topGuideline">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        bind:adapter="@{navigator.passes}"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/layout_item_dashboard_pass" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_bgd_hollow_signin" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/bottomGuideline">
+
+                    <include
+                        layout="@layout/layout_dashboard_navigation_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        app:onClick="@{navigator.onViewAreasClick}"
+                        app:text="@{@string/button_dashboard_areas}" />
+
+                    <include
+                        layout="@layout/layout_dashboard_navigation_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="10dp"
+                        app:onClick="@{navigator.onViewAccountClick}"
+                        app:text="@{@string/button_dashboard_account}" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/about"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{navigator.about}"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Lüsua © 2019\nv.0.0.0" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/startGuideline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.05" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/endGuideline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.95" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/topGuideline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.2" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/bottomGuideline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.65" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

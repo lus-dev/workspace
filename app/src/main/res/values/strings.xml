@@ -17,4 +17,15 @@
     <string name="button_submit">Submit</string>
     <string name="button_reset">Reset</string>
     <string name="button_ok">Okay</string>
+    <string name="button_dashboard_areas">Passes</string>
+    <string name="button_dashboard_account">Account details</string>
+
+    <string name="label_dashboard_username">%s</string>
+    <string name="label_dashboard_trial">Trial remains: %s</string>
+    <string name="label_dashboard_about">Lüsua © 2019\nv.%s</string>
+    <string name="label_dashboard_passes_valid_thru">valid thru\n%s</string>
+    <plurals name="label_month">
+        <item quantity="one">mo.</item>
+        <item quantity="other">mos.</item>
+    </plurals>
 </resources>

@@ -8,7 +8,7 @@ import dagger.Module
 import lus.areapass.auth.viewmodels.AuthenticationViewModel
 import lus.areapass.auth.viewmodels.CreateAccountViewModel
 import lus.areapass.auth.viewmodels.ResetPasswordViewModel
-import lus.areapass.dashboard.DashboardViewModel
+import lus.areapass.dashboard.viewmodels.DashboardViewModel
 import lus.areapass.auth.viewmodels.SignInViewModel
 import lus.areapass.di.modules.ApiServiceModule
 import lus.areapass.di.modules.PreferencesModule

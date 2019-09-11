@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
-        tools:background="@drawable/upd_form_bgd_error">
+        tools:background="@drawable/form_bgd_error">
 
         <TextView
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@drawable/upd_button_bgd_error"
+            android:background="@drawable/button_bgd_error"
             android:gravity="center"
             android:onClick="@{viewModel.onClose}"
             android:text="@string/button_ok"

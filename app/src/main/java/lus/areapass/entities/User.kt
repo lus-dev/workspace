@@ -5,7 +5,7 @@ import android.util.Patterns
 
 class User constructor() {
 
-    var id: Int? = null
+    var id: Long? = null
     var username: String? = null
     var email: String? = null
     var password: String? = null
@@ -26,6 +26,13 @@ class User constructor() {
                 username = identifier
             }
         }
+    }
+
+    fun getFullName(): String? {
+        if (firstName != null && lastName != null) {
+            return "$firstName $lastName"
+        }
+        return null
     }
 
 }
