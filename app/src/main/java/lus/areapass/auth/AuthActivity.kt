@@ -1,5 +1,7 @@
 package lus.areapass.auth
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import lus.areapass.BaseActivity
@@ -11,7 +13,13 @@ import lus.areapass.di.viewModel
 import lus.areapass.entities.User
 
 
+fun AuthActivity.Companion.navigate(context: Context) {
+    val intent = Intent(context, AuthActivity::class.java)
+    context.startActivity(intent)
+}
+
 class AuthActivity : BaseActivity<AuthenticationViewModel>() {
+    companion object;
 
     override val viewModel by viewModel {
         injector.authenticationViewModel.apply {
@@ -31,6 +39,7 @@ class AuthActivity : BaseActivity<AuthenticationViewModel>() {
     private fun navigateToHome(user: User) {
         viewModel.rememberUserLocally(user)
         DashboardActivity.navigate(this)
+        finish()
     }
 
     private fun onCreateAccount() {

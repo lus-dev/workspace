@@ -36,8 +36,10 @@ class DashboardViewModel @Inject constructor( // @AssistedInject
     val about: MutableLiveData<String> = MutableLiveData()
 
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
+    override val showBack: MutableLiveData<Boolean> = MutableLiveData()
 
     val passes: MutableLiveData<FlexibleAdapter<DashboardPassItem>> = MutableLiveData()
+
 
     fun getRememberedUser() = userPreferences.load()
 

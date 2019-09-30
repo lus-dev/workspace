@@ -1,5 +1,3 @@
-@file:Suppress("UNCHECKED_CAST")
-
 package lus.areapass.di
 
 import androidx.activity.viewModels

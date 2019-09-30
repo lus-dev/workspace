@@ -14,6 +14,11 @@ class AreaPassApplication : Application(), InjectorProvider {
 
     override fun onCreate() {
         super.onCreate()
+        enableDateTimeAPI()
+    }
+
+    private fun enableDateTimeAPI() {
         AndroidThreeTen.init(this)
     }
+
 }

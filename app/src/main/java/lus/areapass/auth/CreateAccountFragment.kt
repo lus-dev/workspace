@@ -25,6 +25,6 @@ class CreateAccountFragment : BaseFragment<CreateAccountViewModel, ViewDataBindi
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        navigator.showToolbar("Create Account")
+        navigator.showToolbar(title = "Create Account", showBack = true)
     }
 }

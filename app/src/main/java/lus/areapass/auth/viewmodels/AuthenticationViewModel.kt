@@ -13,6 +13,7 @@ class AuthenticationViewModel @Inject constructor(
 
     override val title: MutableLiveData<String> = MutableLiveData()
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
+    override val showBack: MutableLiveData<Boolean> = MutableLiveData()
     override val onSignIn: MutableLiveData<User> = MutableLiveData()
     override val onCreateAccount: MutableLiveData<Unit> = MutableLiveData()
     override val onResetPassword: MutableLiveData<Unit> = MutableLiveData()

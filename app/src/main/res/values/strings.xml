@@ -19,6 +19,8 @@
     <string name="button_ok">Okay</string>
     <string name="button_dashboard_areas">Passes</string>
     <string name="button_dashboard_account">Account details</string>
+    <string name="button_sign_out">Sign out</string>
+    <string name="button_change_password">Change password</string>
 
     <string name="label_dashboard_username">%s</string>
     <string name="label_dashboard_trial">Trial remains: %s</string>
@@ -28,4 +30,6 @@
         <item quantity="one">mo.</item>
         <item quantity="other">mos.</item>
     </plurals>
+
+    <string name="title_account">Account</string>
 </resources>

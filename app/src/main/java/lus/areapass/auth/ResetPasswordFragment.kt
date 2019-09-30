@@ -24,7 +24,7 @@ class ResetPasswordFragment : BaseFragment<ResetPasswordViewModel, ViewDataBindi
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        navigator.showToolbar("Reset Password")
+        navigator.showToolbar(title = "Reset Password", showBack = true)
     }
 
 }

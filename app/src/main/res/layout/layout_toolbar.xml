@@ -4,25 +4,32 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="navigator"
-            type="lus.areapass.Navigator" />
-
-    </data>
-
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         app:contentInsetStart="0dp"
-        bind:visible="@{navigator.showToolbar}">
+        bind:visible="@{navigator.showToolbar}"
+        tools:background="@color/dark_blue2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="@{navigator.onBackClick}"
+                android:paddingStart="16dp"
+                android:paddingTop="11dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="11dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:visible="@{navigator.showBack}"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,15 +44,6 @@
                 tools:text="Toolbar Title"
                 tools:textColor="@android:color/white" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="@{navigator.onBackClick}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
-
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -58,5 +56,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
+
+
+    <data>
+
+        <variable
+            name="navigator"
+            type="lus.areapass.Navigator" />
+
+    </data>
 
 </layout>

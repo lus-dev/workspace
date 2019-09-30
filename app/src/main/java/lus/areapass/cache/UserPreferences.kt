@@ -20,6 +20,10 @@ class UserPreferences constructor(private val storage: UserFieldStorage) {
         return data
     }
 
+    fun markNonAuthorized() {
+        storage.id = null
+    }
+
 }
 
 @AllFavor

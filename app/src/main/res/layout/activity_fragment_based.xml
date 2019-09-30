@@ -6,7 +6,7 @@
 
         <variable
             name="navigator"
-            type="lus.areapass.auth.viewmodels.AuthenticationViewModel" />
+            type="lus.areapass.Navigator" />
 
     </data>
 
