@@ -11,11 +11,12 @@ import androidx.fragment.app.commit
 abstract class BaseActivity<N : Navigator> : AppCompatActivity() {
 
     abstract val viewModel: N
-    protected lateinit var binding: ViewDataBinding
+    protected val binding: ViewDataBinding by lazy {
+        DataBindingUtil.setContentView<ViewDataBinding>(this@BaseActivity, getLayoutId())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.setVariable(BR.navigator, viewModel)
         setSupportActionBar(findViewById(R.id.toolbar))
     }

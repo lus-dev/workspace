@@ -21,17 +21,21 @@
         <ImageView
             android:id="@+id/logo"
             style="@style/Logo"
+            app:layout_constraintBottom_toTopOf="@id/inputForm"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
+            android:id="@+id/inputForm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:paddingBottom="20dp"
             android:orientation="vertical"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@id/submit"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
             app:layout_constraintTop_toBottomOf="@id/logo">
@@ -125,15 +129,18 @@
             app:layout_constraintGuide_percent="0.8" />
 
         <Button
+            android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:background="@color/yellow"
             android:onClick="@{viewModel.onSubmit}"
             android:text="@string/button_submit"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:textAllCaps="false"
-            android:textColor="@color/dark_blue" />
+            android:textColor="@color/dark_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputForm"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

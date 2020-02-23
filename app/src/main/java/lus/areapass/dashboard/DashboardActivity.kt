@@ -47,7 +47,7 @@ class DashboardActivity : BaseActivity<DashboardViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableRecyclerAdapterBinding()
-        viewModel.showToolbar(title = getString(R.string.app_name), showBack = true)
+        viewModel.showToolbar(title = getString(R.string.app_name), showBack = false)
     }
 
     override fun onResume() {

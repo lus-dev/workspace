@@ -21,6 +21,7 @@
     <string name="button_dashboard_account">Account details</string>
     <string name="button_sign_out">Sign out</string>
     <string name="button_change_password">Change password</string>
+    <string name="button_save">Keep changes</string>
 
     <string name="label_dashboard_username">%s</string>
     <string name="label_dashboard_trial">Trial remains: %s</string>

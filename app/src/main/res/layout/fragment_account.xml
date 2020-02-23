@@ -12,7 +12,6 @@
 
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,10 +19,13 @@
         tools:background="@drawable/form_bgd_auth">
 
         <LinearLayout
+            android:id="@+id/inputForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/space"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside">
 
             <include layout="@layout/layout_toolbar" />
 
@@ -35,27 +37,40 @@
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp">
 
-                <include layout="@layout/layout_account_field"
-                    bind:label="@{@string/hint_first_name}"
+                <include
+                    layout="@layout/layout_account_field"
+                    bind:hint="@{@string/hint_username}"
+                    bind:label="@{@string/hint_username}"
+                    bind:value="@={viewModel.username}" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp" />
+
+                <include
+                    layout="@layout/layout_account_field"
                     bind:hint="@{@string/hint_first_name}"
+                    bind:label="@{@string/hint_first_name}"
                     bind:value="@={viewModel.firstName}" />
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="12dp" />
 
-                <include layout="@layout/layout_account_field"
-                    bind:label="@{@string/hint_last_name}"
+                <include
+                    layout="@layout/layout_account_field"
                     bind:hint="@{@string/hint_last_name}"
+                    bind:label="@{@string/hint_last_name}"
                     bind:value="@={viewModel.lastName}" />
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="12dp" />
 
-                <include layout="@layout/layout_account_field"
-                    bind:label="@{@string/hint_email}"
+                <include
+                    layout="@layout/layout_account_field"
                     bind:hint="@{@string/hint_email}"
+                    bind:label="@{@string/hint_email}"
                     bind:value="@={viewModel.email}" />
 
             </LinearLayout>
@@ -68,42 +83,36 @@
 
         </LinearLayout>
 
-
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/navigation"
+            app:layout_constraintTop_toBottomOf="@id/inputForm" />
 
         <LinearLayout
+            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space"
+            app:layout_constraintVertical_chainStyle="spread_inside">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                layout="@layout/layout_account_nav_button"
+                bind:label="@{@string/button_change_password}"
+                bind:onClick="@{viewModel.onChangePassword}" />
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@color/yellow">
+                android:layout_height="1dp"
+                android:background="@color/dark_blue" />
 
-                <TextView
-                    style="@style/Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel.onSignOut}"
-                    android:text="@string/button_change_password"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:layout_width="8dp"
-                    android:layout_height="18dp"
-                    android:layout_marginEnd="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_arrow_navigate"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                style="@style/Button"
+                android:onClick="@{viewModel.onSaveChanges}"
+                android:text="@string/button_save" />
 
             <View
                 android:layout_width="match_parent"
@@ -116,8 +125,6 @@
                 android:text="@string/button_sign_out" />
 
         </LinearLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

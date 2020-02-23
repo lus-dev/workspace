@@ -6,8 +6,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import lus.areapass.BaseActivity
 import lus.areapass.account.viewmodels.AccountViewModel
-import lus.areapass.auth.AuthActivity
-import lus.areapass.auth.navigate
 import lus.areapass.di.injector
 import lus.areapass.di.viewModel
 
@@ -24,6 +22,7 @@ class AccountActivity : BaseActivity<AccountViewModel>() {
         injector.accountViewModel.apply {
             onChangePassword.observe(this@AccountActivity, Observer { onChangePassword() })
             onSignOut.observe(this@AccountActivity, Observer { onSignOut() })
+            onBack.observe(this@AccountActivity, Observer { onBackPressed() })
         }
     }
 
