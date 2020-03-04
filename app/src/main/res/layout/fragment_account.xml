@@ -97,7 +97,17 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/space"
-            app:layout_constraintVertical_chainStyle="spread_inside">
+            tools:layout_height="0dp">
+
+            <include
+                layout="@layout/layout_account_nav_button"
+                bind:label="@{@string/button_subscription}"
+                bind:onClick="@{viewModel.onShowSubscription}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_blue" />
 
             <include
                 layout="@layout/layout_account_nav_button"
@@ -111,6 +121,7 @@
 
             <TextView
                 style="@style/Button"
+                android:background="@color/yellow"
                 android:onClick="@{viewModel.onSaveChanges}"
                 android:text="@string/button_save" />
 
@@ -121,6 +132,7 @@
 
             <TextView
                 style="@style/Button"
+                android:background="@color/yellow"
                 android:onClick="@{viewModel.onSignOut}"
                 android:text="@string/button_sign_out" />
 

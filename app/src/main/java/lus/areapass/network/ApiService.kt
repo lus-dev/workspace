@@ -9,4 +9,6 @@ interface ApiService {
     suspend fun createAccount(data: User): Response<User>
     suspend fun resetPassword(identifier: String): Response<Unit>
     suspend fun fetchEndingPasses(userId: Long): Response<List<Pass>>
+    suspend fun updateAccount(data: User): Response<User>
+    suspend fun changePassword(data: User): Response<Unit>
 }

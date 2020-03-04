@@ -21,8 +21,10 @@ class AccountActivity : BaseActivity<AccountViewModel>() {
     override val viewModel by viewModel {
         injector.accountViewModel.apply {
             onChangePassword.observe(this@AccountActivity, Observer { onChangePassword() })
+            onShowSubscription.observe(this@AccountActivity, Observer {  })
             onSignOut.observe(this@AccountActivity, Observer { onSignOut() })
             onBack.observe(this@AccountActivity, Observer { onBackPressed() })
+            onRefreshUi.observe(this@AccountActivity, Observer { binding.invalidateAll() })
         }
     }
 
@@ -32,7 +34,11 @@ class AccountActivity : BaseActivity<AccountViewModel>() {
     }
 
     private fun onChangePassword() {
-//        loadFragment(type = CreateAccountFragment::class.java, addToBackStack = true)
+        loadFragment(type = ChangePasswordFragment::class.java, addToBackStack = true)
+    }
+
+    private fun onShowSubscription() {
+        // TODO Add screen navigation
     }
 
     private fun onSignOut() {

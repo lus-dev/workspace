@@ -10,7 +10,7 @@ import lus.areapass.account.viewmodels.AccountDetailsViewModel
 import lus.areapass.account.viewmodels.AccountNavigator
 import lus.areapass.di.injector
 import lus.areapass.di.viewModel
-import lus.areapass.notification.ErrorDialog
+import lus.areapass.notification.InfoDialog
 
 
 class AccountDetailsFragment: BaseFragment<AccountDetailsViewModel, ViewDataBinding, AccountNavigator>() {
@@ -18,8 +18,10 @@ class AccountDetailsFragment: BaseFragment<AccountDetailsViewModel, ViewDataBind
     override val viewModel by viewModel {
         injector.accountDetailsViewModel.apply {
             onChangePassword.value = View.OnClickListener { navigator.onChangePassword.value = Unit }
+            onShowSubscription.value = View.OnClickListener { navigator.onShowSubscription.value = Unit }
             onSignedOut.observe(this@AccountDetailsFragment, Observer { navigator.onSignOut.value = Unit })
             onChangeSaved.observe(this@AccountDetailsFragment, Observer { onChangeSaved() })
+            errors.observe(this@AccountDetailsFragment, Observer { onFailure(it) })
         }
     }
 
@@ -31,8 +33,7 @@ class AccountDetailsFragment: BaseFragment<AccountDetailsViewModel, ViewDataBind
     }
 
     private fun onChangeSaved() {
-        // TODO Make service call. Add information dialog
-        ErrorDialog.show(childFragmentManager, "Changes successfully saved")
+        InfoDialog.show(childFragmentManager, "Changes successfully saved")
     }
 
 }

@@ -57,6 +57,22 @@ class RetrofittableApiService @Inject constructor(
         }
     }
 
+    override suspend fun updateAccount(data: User): Response<User> {
+        return try {
+            Success(data)
+        } catch (exc: Throwable) {
+            Error("Something went wrong. Try again later")
+        }
+    }
+
+    override suspend fun changePassword(data: User): Response<Unit> {
+        return try {
+            Success(Unit)
+        } catch (exc: Throwable) {
+            Error("Something went wrong. Try again later")
+        }
+    }
+
     private fun createStubPass(name: String, totalVisits: Int?): Pass {
         val data = Pass()
         data.areaName = name

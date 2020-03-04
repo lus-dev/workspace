@@ -7,6 +7,7 @@ import dagger.Component
 import dagger.Module
 import lus.areapass.account.viewmodels.AccountDetailsViewModel
 import lus.areapass.account.viewmodels.AccountViewModel
+import lus.areapass.account.viewmodels.ChangePasswordViewModel
 import lus.areapass.auth.viewmodels.AuthenticationViewModel
 import lus.areapass.auth.viewmodels.CreateAccountViewModel
 import lus.areapass.auth.viewmodels.ResetPasswordViewModel
@@ -33,6 +34,7 @@ interface ApplicationComponent {
     val dashboardViewModel: DashboardViewModel // DashboardViewModel.Factory
     val accountViewModel: AccountViewModel
     val accountDetailsViewModel: AccountDetailsViewModel
+    val changePasswordViewModel: ChangePasswordViewModel
 
 }
 

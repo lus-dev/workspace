@@ -4,23 +4,23 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentManager
 import lus.areapass.R
-import lus.areapass.notification.viewmodels.ErrorViewModel
+import lus.areapass.notification.viewmodels.InfoViewModel
 
 
-class ErrorDialog constructor(message: String) : BaseDialog<ErrorViewModel, ViewDataBinding>() {
+class InfoDialog constructor(message: String): BaseDialog<InfoViewModel, ViewDataBinding>() {
 
     companion object {
-        fun show(manager: FragmentManager, message: String) = ErrorDialog(message).show(manager, null)
+        fun show(manager: FragmentManager, message: String) = InfoDialog(message).show(manager, null)
     }
 
     init {
-        viewModel = ErrorViewModel(message).apply {
+        viewModel = InfoViewModel(message).apply {
             onClose.value = View.OnClickListener { close() }
         }
     }
 
 
-    override fun getLayoutId() = R.layout.dialog_error
+    override fun getLayoutId() = R.layout.dialog_info
 
     override fun provideViewModel() = viewModel
 

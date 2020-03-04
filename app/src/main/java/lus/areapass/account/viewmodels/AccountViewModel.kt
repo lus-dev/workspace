@@ -11,6 +11,7 @@ class AccountViewModel @Inject constructor() : AccountNavigator, ViewModel() {
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
     override val showBack: MutableLiveData<Boolean> = MutableLiveData()
     override val onChangePassword: MutableLiveData<Unit> = MutableLiveData()
+    override val onShowSubscription: MutableLiveData<Unit> = MutableLiveData()
     override val onSignOut: MutableLiveData<Unit> = MutableLiveData()
     override val onBack: MutableLiveData<Unit> = MutableLiveData()
     override val onRefreshUi: MutableLiveData<Unit> = MutableLiveData()

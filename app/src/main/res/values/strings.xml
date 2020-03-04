@@ -9,6 +9,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_username">Username</string>
     <string name="hint_promo_code">Promo code</string>
+    <string name="hint_new_password">New password</string>
 
     <string name="button_sign_in">Sign In</string>
     <string name="button_create_account">Create account</string>
@@ -22,6 +23,8 @@
     <string name="button_sign_out">Sign out</string>
     <string name="button_change_password">Change password</string>
     <string name="button_save">Keep changes</string>
+    <string name="button_subscription">Subscription</string>
+    <string name="button_change">Change</string>
 
     <string name="label_dashboard_username">%s</string>
     <string name="label_dashboard_trial">Trial remains: %s</string>
@@ -33,4 +36,5 @@
     </plurals>
 
     <string name="title_account">Account</string>
+    <string name="title_change_password">Change password</string>
 </resources>

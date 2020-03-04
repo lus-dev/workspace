@@ -114,7 +114,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Lüsua © 2019\nv.0.0.0" />
+                    tools:text="Lüsua © 2020\nv.0.0.0" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/startGuideline"

@@ -2,9 +2,15 @@ package lus.areapass.account.viewmodels
 
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import lus.areapass.BaseViewModel
 import lus.areapass.cache.UserPreferences
+import lus.areapass.entities.User
 import lus.areapass.network.ApiService
+import lus.areapass.network.Error
+import lus.areapass.network.Success
 import javax.inject.Inject
 
 
@@ -20,6 +26,7 @@ class AccountDetailsViewModel @Inject constructor(
     val lastName: MutableLiveData<String> = MutableLiveData()
     val email: MutableLiveData<String> = MutableLiveData()
     val onChangePassword: MutableLiveData<View.OnClickListener> = MutableLiveData()
+    val onShowSubscription: MutableLiveData<View.OnClickListener> = MutableLiveData()
     val onSignedOut: MutableLiveData<Unit> = MutableLiveData()
     val onChangeSaved: MutableLiveData<Unit> = MutableLiveData()
 
@@ -38,14 +45,46 @@ class AccountDetailsViewModel @Inject constructor(
     }
 
     private fun saveChanges() {
-        user.value?.let {
-            it.username = username.value
-            it.firstName = firstName.value
-            it.lastName = lastName.value
-            it.email = email.value
-            userPreferences.save(it)
+        if (validateData()) {
+            user.value?.apply {
+                username = this@AccountDetailsViewModel.username.value
+                firstName = this@AccountDetailsViewModel.firstName.value
+                lastName = this@AccountDetailsViewModel.lastName.value
+                email = this@AccountDetailsViewModel.email.value
+            }?.also {
+                userPreferences.save(it)
+                updateAccount(it)
+            }
         }
-        onChangeSaved.value = Unit
+    }
+
+    private fun validateData(): Boolean {
+        if (firstName.value.isNullOrBlank()) {
+            setError("The first name is required")
+            return false
+        }
+        if (lastName.value.isNullOrBlank()) {
+            setError("The last name is required")
+            return false
+        }
+        if (email.value.isNullOrBlank()) {
+            setError("The email is required")
+            return false
+        }
+        if (username.value.isNullOrBlank()) {
+            setError("The username is required")
+            return false
+        }
+        return true
+    }
+
+    private fun updateAccount(data: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val response = apiService.updateAccount(data)) {
+                is Success -> onChangeSaved.postValue(Unit)
+                is Error -> postError(response.message)
+            }
+        }
     }
 
 }
