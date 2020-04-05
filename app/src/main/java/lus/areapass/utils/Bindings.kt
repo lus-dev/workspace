@@ -2,6 +2,7 @@ package lus.areapass.utils
 
 import android.view.View
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 
 
 object Bindings {
@@ -18,6 +19,12 @@ object Bindings {
         if (resId != 0) {
             view.setBackgroundResource(resId)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("adapter")
+    fun setRecyclerAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+        view.adapter = adapter
     }
 
 }

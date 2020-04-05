@@ -46,7 +46,7 @@ class DashboardActivity : BaseActivity<DashboardViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableRecyclerAdapterBinding()
+//        enableRecyclerAdapterBinding()
         viewModel.showToolbar(title = getString(R.string.app_name), showBack = false)
     }
 
@@ -62,9 +62,9 @@ class DashboardActivity : BaseActivity<DashboardViewModel>() {
         }
     }
 
-    private fun enableRecyclerAdapterBinding() {
-        binding.lifecycleOwner = this
-    }
+//    private fun enableRecyclerAdapterBinding() {
+//        binding.lifecycleOwner = this
+//    }
 
     private fun buildLabels(user: User) {
         viewModel.username.value = String.format(getString(R.string.label_dashboard_username), user.getFullName())

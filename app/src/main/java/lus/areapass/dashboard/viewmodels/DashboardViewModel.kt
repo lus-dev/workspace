@@ -3,12 +3,12 @@ package lus.areapass.dashboard.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import eu.davidea.flexibleadapter.FlexibleAdapter
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lus.areapass.cache.UserPreferences
 import lus.areapass.dashboard.DashboardNavigator
-import lus.areapass.dashboard.DashboardPassItem
+import lus.areapass.dashboard.DashboardPassesAdapter
 import lus.areapass.network.ApiService
 import lus.areapass.network.Success
 import javax.inject.Inject
@@ -38,7 +38,7 @@ class DashboardViewModel @Inject constructor( // @AssistedInject
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
     override val showBack: MutableLiveData<Boolean> = MutableLiveData()
 
-    val passes: MutableLiveData<FlexibleAdapter<DashboardPassItem>> = MutableLiveData()
+    val passes: MutableLiveData<RecyclerView.Adapter<*>> = MutableLiveData()
 
 
     fun getRememberedUser() = userPreferences.load()
@@ -47,7 +47,7 @@ class DashboardViewModel @Inject constructor( // @AssistedInject
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = apiService.fetchEndingPasses(userId)) {
                 is Success -> {
-                    val data = FlexibleAdapter(response.data.map(::DashboardPassItem))
+                    val data = DashboardPassesAdapter(response.data)
                     passes.postValue(data)
                 }
 //                is Error -> postError(response.message)

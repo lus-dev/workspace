@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="lus.areapass.dashboard.DashboardPassItem" />
+            type="lus.areapass.dashboard.DashboardPassItemViewModel" />
 
     </data>
 

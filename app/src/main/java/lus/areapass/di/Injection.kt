@@ -18,8 +18,9 @@ import lus.areapass.di.modules.PreferencesModule
 import javax.inject.Singleton
 
 
+//AssistedInjectModule::class,
 @Singleton
-@Component(modules = [AssistedInjectModule::class, ApiServiceModule::class, PreferencesModule::class])
+@Component(modules = [ApiServiceModule::class, PreferencesModule::class])
 interface ApplicationComponent {
 
     @Component.Factory
@@ -38,6 +39,6 @@ interface ApplicationComponent {
 
 }
 
-@AssistedModule
-@Module(includes = [AssistedInject_AssistedInjectModule::class])
-interface AssistedInjectModule
+//@AssistedModule
+//@Module(includes = [AssistedInject_AssistedInjectModule::class])
+//interface AssistedInjectModule
