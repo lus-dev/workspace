@@ -8,7 +8,7 @@
 
         <variable
             name="navigator"
-            type="lus.areapass.dashboard.viewmodels.DashboardViewModel" />
+            type="lus.areapass.dashboard.DashboardNavigator" />
 
     </data>
 
@@ -90,16 +90,16 @@
                         layout="@layout/layout_dashboard_navigation_button"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        app:text="@{@string/button_dashboard_areas}" />
-<!--                    TODO Investigate app:onClick="@{navigator.onViewAreasClick}"-->
+                        app:text="@{@string/button_dashboard_areas}"
+                        app:onClick="@{navigator::onViewAreasClick}" />
 
                     <include
                         layout="@layout/layout_dashboard_navigation_button"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:layout_marginTop="10dp"
-                        app:text="@{@string/button_dashboard_account}" />
-<!--                    TODO Investigate app:onClick="@{navigator.onViewAccountClick}"-->
+                        app:text="@{@string/button_dashboard_account}"
+                        app:onClick="@{navigator::onViewAccountClick}" />
 
                 </LinearLayout>
 

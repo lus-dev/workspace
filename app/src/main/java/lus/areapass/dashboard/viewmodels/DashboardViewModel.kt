@@ -32,14 +32,14 @@ class DashboardViewModel @Inject constructor( // @AssistedInject
     override val onRefreshUi: MutableLiveData<Unit> = MutableLiveData()
 
     override val title: MutableLiveData<String> = MutableLiveData()
-    val username: MutableLiveData<String> = MutableLiveData()
-    val trial: MutableLiveData<String> = MutableLiveData()
-    val about: MutableLiveData<String> = MutableLiveData()
+    override val username: MutableLiveData<String> = MutableLiveData()
+    override val trial: MutableLiveData<String> = MutableLiveData()
+    override val about: MutableLiveData<String> = MutableLiveData()
 
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
     override val showBack: MutableLiveData<Boolean> = MutableLiveData()
 
-    val passes: MutableLiveData<RecyclerView.Adapter<out RecyclerView.ViewHolder>> = MutableLiveData()
+    override val passes: MutableLiveData<RecyclerView.Adapter<out RecyclerView.ViewHolder>> = MutableLiveData()
 
     init {
         passes.value = DashboardPassesAdapter(Collections.emptyList())
