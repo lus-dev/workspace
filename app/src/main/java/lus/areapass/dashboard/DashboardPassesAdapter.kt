@@ -5,18 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import lus.areapass.BR
 import lus.areapass.R
+import lus.areapass.dashboard.viewmodels.DashboardPassItemViewModel
 import lus.areapass.entities.Pass
-import lus.areapass.views.RecyclerItemHolder
+import lus.areapass.views.BoundRecyclerItemViewHolder
 
 
-class DashboardPassesAdapter(private val data: List<Pass>) : RecyclerView.Adapter<RecyclerItemHolder>() {
+class DashboardPassesAdapter(private val data: List<Pass>) : RecyclerView.Adapter<BoundRecyclerItemViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoundRecyclerItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_item_dashboard_pass, parent, false);
-        return RecyclerItemHolder(view)
+        return BoundRecyclerItemViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerItemHolder, position: Int) {
+    override fun onBindViewHolder(holder: BoundRecyclerItemViewHolder, position: Int) {
         holder.binding?.setVariable(BR.viewModel, DashboardPassItemViewModel(data, position))
     }
 

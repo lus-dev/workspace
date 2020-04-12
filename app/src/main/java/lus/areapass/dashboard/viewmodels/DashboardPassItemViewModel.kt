@@ -1,9 +1,8 @@
-package lus.areapass.dashboard
+package lus.areapass.dashboard.viewmodels
 
 import lus.areapass.R
 import lus.areapass.entities.Pass
 import lus.areapass.utils.TimeUtil
-import lus.areapass.views.RecyclerItemHolder
 import org.threeten.bp.Period
 
 

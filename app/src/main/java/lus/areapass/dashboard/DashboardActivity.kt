@@ -12,6 +12,7 @@ import lus.areapass.account.navigate
 import lus.areapass.auth.AuthActivity
 import lus.areapass.auth.navigate
 import lus.areapass.dashboard.viewmodels.DashboardViewModel
+import lus.areapass.databinding.ActivityDashboardBinding
 import lus.areapass.di.injector
 import lus.areapass.di.viewModel
 import lus.areapass.entities.User
@@ -46,7 +47,6 @@ class DashboardActivity : BaseActivity<DashboardViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableRecyclerAdapterBinding()
         viewModel.showToolbar(title = getString(R.string.app_name), showBack = false)
     }
 
@@ -61,10 +61,6 @@ class DashboardActivity : BaseActivity<DashboardViewModel>() {
             finish()
         }
     }
-
-//    private fun enableRecyclerAdapterBinding() {
-//        binding.lifecycleOwner = this
-//    }
 
     private fun buildLabels(user: User) {
         viewModel.username.value = String.format(getString(R.string.label_dashboard_username), user.getFullName())

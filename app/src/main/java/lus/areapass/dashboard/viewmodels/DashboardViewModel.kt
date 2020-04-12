@@ -11,6 +11,7 @@ import lus.areapass.dashboard.DashboardNavigator
 import lus.areapass.dashboard.DashboardPassesAdapter
 import lus.areapass.network.ApiService
 import lus.areapass.network.Success
+import java.util.*
 import javax.inject.Inject
 
 
@@ -38,8 +39,11 @@ class DashboardViewModel @Inject constructor( // @AssistedInject
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
     override val showBack: MutableLiveData<Boolean> = MutableLiveData()
 
-    val passes: MutableLiveData<RecyclerView.Adapter<*>> = MutableLiveData()
+    val passes: MutableLiveData<RecyclerView.Adapter<out RecyclerView.ViewHolder>> = MutableLiveData()
 
+    init {
+        passes.value = DashboardPassesAdapter(Collections.emptyList())
+    }
 
     fun getRememberedUser() = userPreferences.load()
 
@@ -47,6 +51,7 @@ class DashboardViewModel @Inject constructor( // @AssistedInject
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = apiService.fetchEndingPasses(userId)) {
                 is Success -> {
+                    // TODO Provide set data method and apply notify method call
                     val data = DashboardPassesAdapter(response.data)
                     passes.postValue(data)
                 }

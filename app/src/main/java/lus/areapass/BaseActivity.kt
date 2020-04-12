@@ -12,7 +12,9 @@ abstract class BaseActivity<N : Navigator> : AppCompatActivity() {
 
     abstract val viewModel: N
     protected val binding: ViewDataBinding by lazy {
-        DataBindingUtil.setContentView<ViewDataBinding>(this@BaseActivity, getLayoutId())
+        DataBindingUtil
+            .setContentView<ViewDataBinding>(this@BaseActivity, getLayoutId())
+            .apply { lifecycleOwner = this@BaseActivity }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,7 @@ abstract class BaseActivity<N : Navigator> : AppCompatActivity() {
 
     private fun hasFragments() = supportFragmentManager.backStackEntryCount > 0
 
-    private fun getTopFragment() = supportFragmentManager.findFragmentById(R.id.content) as? BaseFragment<*,*,*>
+    private fun getTopFragment() =
+        supportFragmentManager.findFragmentById(R.id.content) as? BaseFragment<*, *, *>
 
 }
