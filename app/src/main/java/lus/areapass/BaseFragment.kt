@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModel
 import lus.areapass.notification.ErrorDialog
 
 
-abstract class BaseFragment<VM : ViewModel, VB : ViewDataBinding, N : Navigator> : Fragment() {
+abstract class BaseFragment<VM : ViewModel, VB : ViewDataBinding> : Fragment() {
 
-    protected val navigator get() = (activity as BaseActivity<N>).viewModel
     protected abstract val viewModel: VM
     protected lateinit var binding: VB
 
