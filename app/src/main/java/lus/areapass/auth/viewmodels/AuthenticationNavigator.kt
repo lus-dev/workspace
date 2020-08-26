@@ -2,7 +2,7 @@ package lus.areapass.auth.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import lus.areapass.Navigator
-import lus.areapass.entities.User
+import lus.areapass.entities.person.User
 
 
 interface AuthenticationNavigator : Navigator {

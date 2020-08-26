@@ -24,4 +24,6 @@ class ErrorDialog constructor(message: String) : BaseDialog<ErrorViewModel, View
 
     override fun provideViewModel() = viewModel
 
+    override fun getStyleId() = R.style.Dialog_Error
+
 }

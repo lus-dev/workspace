@@ -1,14 +1,13 @@
 package lus.areapass
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import lus.areapass.entities.User
 
 
-abstract class BaseViewModel: ViewModel() {
+abstract class BaseViewModel(private val appContext: Context): ViewModel() {
 
-    val user: MutableLiveData<User> = MutableLiveData()
-    val errors: MutableLiveData<MutableList<String>> = MutableLiveData()
+    val errors: MutableLiveData<List<String>> = MutableLiveData()
 
     init {
         errors.value = ArrayList()
@@ -22,8 +21,12 @@ abstract class BaseViewModel: ViewModel() {
         errors.postValue(arrayListOf(message))
     }
 
-    protected fun clearErrors() {
-        errors.value?.clear()
+    protected fun validate(value: String?, errorResId: Int): Boolean {
+        if (value.isNullOrBlank()) {
+            setError(appContext.getString(errorResId))
+            return false
+        }
+        return true
     }
 
 }

@@ -11,18 +11,20 @@ import androidx.lifecycle.ViewModel
 import lus.areapass.notification.ErrorDialog
 
 
-abstract class BaseFragment<VM : ViewModel, VB : ViewDataBinding, N : Navigator> : Fragment() {
+abstract class BaseFragment<VM : ViewModel, VB : ViewDataBinding> : Fragment() {
 
-    protected val navigator get() = (activity as BaseActivity<N>).viewModel
     protected abstract val viewModel: VM
     protected lateinit var binding: VB
-
 
     protected abstract fun getLayoutId(): Int
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        binding.setVariable(BR.viewModel, viewModel)
+        binding = DataBindingUtil
+            .inflate<ViewDataBinding>(inflater, getLayoutId(), container, false)
+            .apply {
+                lifecycleOwner = this@BaseFragment.viewLifecycleOwner
+                setVariable(BR.viewModel, viewModel)
+            } as VB
         return binding.root
     }
 

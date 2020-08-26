@@ -1,23 +1,33 @@
 package lus.areapass.auth.viewmodels
 
+import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lus.areapass.BaseViewModel
-import lus.areapass.entities.User
+import lus.areapass.R
+import lus.areapass.entities.credentials.EmailCredentials
+import lus.areapass.entities.discount.IDiscount
+import lus.areapass.entities.discount.Promocode
+import lus.areapass.entities.discount.ZeroDiscount
+import lus.areapass.entities.person.Contact
+import lus.areapass.entities.person.User
 import lus.areapass.network.ApiService
 import lus.areapass.network.Error
+import lus.areapass.network.PassApiService
 import lus.areapass.network.Success
 import java.util.*
 import javax.inject.Inject
 
 
 class CreateAccountViewModel @Inject constructor(
+    private val appContext: Context,
     private val apiService: ApiService
-) : BaseViewModel() {
+) : BaseViewModel(appContext) {
 
+    val user: MutableLiveData<User> = MutableLiveData()
     val onSubmit: View.OnClickListener = View.OnClickListener { create() }
     val firstName: MutableLiveData<String> = MutableLiveData()
     val lastName: MutableLiveData<String> = MutableLiveData()
@@ -28,11 +38,26 @@ class CreateAccountViewModel @Inject constructor(
     val promoCode: MutableLiveData<String> = MutableLiveData()
     val usePromoCode: MutableLiveData<Boolean> = MutableLiveData()
 
+    private val contact
+        get() = Contact(
+            firstName.value ?: "",
+            lastName.value ?: "",
+            username.value ?: "",
+            email.value ?: "")
+    private val credentials
+        get() = EmailCredentials(
+            email.value ?: "",
+            password.value ?: "")
+    private val discount: IDiscount
+        get() {
+            val code = promoCode.value
+            return if (code != null && code.isNotBlank()) Promocode(code) else ZeroDiscount()
+        }
 
     private fun create() {
-        if (validateData()) {
+        if (validate()) {
             viewModelScope.launch(Dispatchers.IO) {
-                when (val response = apiService.createAccount(buildModel())) {
+                when (val response = apiService.createAccount(contact, credentials, discount)) {
                     is Success -> user.postValue(response.data)
                     is Error -> postError(response.message)
                 }
@@ -40,46 +65,33 @@ class CreateAccountViewModel @Inject constructor(
         }
     }
 
-    private fun validateData(): Boolean {
-        if (firstName.value.isNullOrBlank()) {
-            setError("The first name is required")
+    // TODO Add email format validation
+    // Patterns.EMAIL_ADDRESS.matcher(email)
+    private fun validate(): Boolean {
+        val fieldsFilled = listOf(
+            firstName to R.string.error_empty_first_name,
+            lastName to R.string.error_empty_last_name,
+            email to R.string.error_empty_email,
+            username to R.string.error_empty_username,
+            password to R.string.error_empty_password)
+            .all { info -> validate(info.first.value, info.second) }
+
+        if (fieldsFilled) {
+            if (!Objects.equals(password.value, confirmPassword.value)) {
+                setError(appContext.getString(R.string.error_not_matched_passwords))
+                return false;
+            }
+        } else {
             return false
         }
-        if (lastName.value.isNullOrBlank()) {
-            setError("The last name is required")
-            return false
-        }
-        if (email.value.isNullOrBlank()) {
-            setError("The email is required")
-            return false
-        }
-        if (username.value.isNullOrBlank()) {
-            setError("The username is required")
-            return false
-        }
-        if (password.value.isNullOrBlank()) {
-            setError("The password is required")
-            return false
-        } else if (!Objects.equals(password.value, confirmPassword.value)) {
-            setError("Passwords aren't matched")
-            return false;
-        }
+
         usePromoCode.value?.let {
             if (it && promoCode.value.isNullOrBlank()) {
-                setError("The promo code is required")
+                setError(appContext.getString(R.string.error_empty_promocode))
                 return false
             }
         }
         return true
-    }
-
-    private fun buildModel(): User {
-        val data = User(email.value, password.value)
-        data.firstName = firstName.value
-        data.lastName = lastName.value
-        data.username = username.value
-        data.promoCode = promoCode.value
-        return data
     }
 
 }
