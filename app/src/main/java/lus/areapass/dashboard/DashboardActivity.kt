@@ -17,7 +17,7 @@ import lus.areapass.pass.PassActivity
 
 class DashboardActivity : BaseActivity<DashboardViewModel>() {
 
-    companion object {
+    companion object B {
         fun navigate(context: Context) {
             val intent = Intent(context, DashboardActivity::class.java)
             context.startActivity(intent)

@@ -12,7 +12,7 @@ class DashboardPassItemViewModel constructor(private val data: List<Pass>, priva
 //        FIRST, LAST, DEFAULT, SINGLE
 //    }
 
-    fun getAreaName() = data.get(position).areaName
+    fun getAreaName() = data[position].form.areaName
 
     fun getBackground(): Int {
         if (data.size == 1) {
@@ -35,13 +35,13 @@ class DashboardPassItemViewModel constructor(private val data: List<Pass>, priva
     }
 
     fun getVisits(): String {
-        val item = data.get(position)
+        val item = data[position].form
         if (item.totalVisits != null) {
-            return String.format("%d/%d", item.userVisits, item.totalVisits)
+            return String.format("%d/%d", 0, item.totalVisits) // item.userVisits
         } else {
-            val creationDate = TimeUtil.toDate(item.creationDate!!)
-            val expDate = TimeUtil.toDate(item.expirationDate!!)
-            val months = Period.between(creationDate, expDate).months
+//            val creationDate = TimeUtil.toDate(item.creationDate!!)
+//            val expDate = TimeUtil.toDate(item.expirationDate!!)
+//            val months = Period.between(creationDate, expDate).months
 //            with(holder.binding!!.root.context) {
 //                return String.format("%d %s", months, resources.getQuantityString(R.plurals.label_month, months))
 //            }

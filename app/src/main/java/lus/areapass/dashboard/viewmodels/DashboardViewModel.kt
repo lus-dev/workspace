@@ -1,9 +1,8 @@
 package lus.areapass.dashboard.viewmodels
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,46 +36,24 @@ class DashboardViewModel @Inject constructor( // @AssistedInject
     override val onViewAreas: MutableLiveData<Unit> = MutableLiveData()
     override val onViewAccount: MutableLiveData<Unit> = MutableLiveData()
     override val onRefreshUi: MutableLiveData<Unit> = MutableLiveData()
-
-    override val title: MutableLiveData<String> = MutableLiveData()
-    override val username: MutableLiveData<String> = MutableLiveData()
-    override val trial: MutableLiveData<String> = MutableLiveData()
-    override val about: MutableLiveData<String> = MutableLiveData()
-
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
     override val showBack: MutableLiveData<Boolean> = MutableLiveData()
+    override val title: MutableLiveData<String> = MutableLiveData()
 
-    override val passes: MutableLiveData<RecyclerView.Adapter<out RecyclerView.ViewHolder>> = MutableLiveData()
-
-    init {
-        passes.value = DashboardPassesAdapter(Collections.emptyList())
+    private val user: LiveData<User> = MutableLiveData(userPreferences.user())
+    override val username: LiveData<String> = Transformations.map(user) {
+        String.format(appContext.getString(R.string.label_dashboard_username), it.fullName())
     }
+    override val trial: LiveData<String> = Transformations.map(user) {
+        String.format(appContext.getString(R.string.label_dashboard_trial), "30 days") // TODO Implement trials
+    }
+    override val about: String
+        get() {
+            return String.format(appContext.getString(R.string.label_dashboard_about), BuildConfig.VERSION_NAME)
+        }
+
+    override val passes by ImutableDashboardPasses(viewModelScope, apiService, user)
 
     fun authorized() = userPreferences.authorized()
-
-    fun refreshPasses(credentials: ICredentials) {
-        viewModelScope.launch(Dispatchers.IO) {
-            when (val response = apiService.fetchEndingPasses(credentials)) {
-                is Success -> {
-                    // TODO Provide set data method and apply notify method call
-                    val data = DashboardPassesAdapter(response.data)
-                    passes.postValue(data)
-                }
-//                is Error -> postError(response.message)
-            }
-        }
-    }
-
-    fun populateUI() {
-        val user = userPreferences.user()
-        refreshLabels(user)
-        refreshPasses(IdCredentials(user.id))
-    }
-
-    private fun refreshLabels(user: User) {
-        username.value = String.format(appContext.getString(R.string.label_dashboard_username), user.fullName())
-        trial.value = String.format(appContext.getString(R.string.label_dashboard_trial), "30 days") // TODO Implement trials
-        about.value = String.format(appContext.getString(R.string.label_dashboard_about), BuildConfig.VERSION_NAME)
-    }
 
 }
