@@ -1,14 +1,14 @@
 package lus.areapass.entities.network
 
+import lus.areapass.entities.credentials.ICredentials
+import lus.areapass.entities.discount.IDiscount
+import lus.areapass.entities.person.IContact
+
 
 interface IAccount {
 
-    val firstName: String
-    val lastName: String
-    val email: String
-    val username: String
-    val identifier: String
-    val password: String
-    val promocode: String
+    val contact: IContact
+    val credentials: ICredentials
+    val discount: IDiscount
 
 }

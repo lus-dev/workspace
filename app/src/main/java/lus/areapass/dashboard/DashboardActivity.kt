@@ -17,7 +17,7 @@ import lus.areapass.pass.PassActivity
 
 class DashboardActivity : BaseActivity<DashboardViewModel>() {
 
-    companion object B {
+    companion object {
         fun navigate(context: Context) {
             val intent = Intent(context, DashboardActivity::class.java)
             context.startActivity(intent)
@@ -49,9 +49,7 @@ class DashboardActivity : BaseActivity<DashboardViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.authorized()) {
-            viewModel.populateUI()
-        } else {
+        if (!viewModel.authorized()) {
             AuthActivity.navigate(this)
             finish()
         }

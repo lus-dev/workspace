@@ -4,11 +4,11 @@ import lus.areapass.entities.Pass
 import lus.areapass.entities.PassForm
 import lus.areapass.entities.credentials.ICredentials
 import lus.areapass.entities.discount.IDiscount
+import lus.areapass.entities.discount.ZeroDiscount
 import lus.areapass.entities.network.IAccount
 import lus.areapass.entities.network.RetrofittableAccount
 import lus.areapass.entities.person.Contact
 import lus.areapass.entities.person.IContact
-import lus.areapass.entities.person.User
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,8 +26,8 @@ class RetrofittableApiService @Inject constructor(
         }
     }
 
-    override suspend fun signIn(credentials: ICredentials): Response<User> {
-        return execute { User(-1, Contact("Sasha", "Lysenko", "lus", "")) }
+    override suspend fun signIn(credentials: ICredentials): Response<IAccount> {
+        return execute { RetrofittableAccount(Contact("Sasha", "Lysenko", "lus", ""), credentials, ZeroDiscount()) }
     }
 
     override suspend fun createAccount(contact: IContact, credentials: ICredentials, discount: IDiscount): Response<IAccount> {
@@ -51,11 +51,11 @@ class RetrofittableApiService @Inject constructor(
         }
     }
 
-    override suspend fun updateAccount(data: User): Response<User> {
+    override suspend fun updateAccount(data: IAccount): Response<IAccount> {
         return execute { data }
     }
 
-    override suspend fun changePassword(data: User): Response<Unit> {
+    override suspend fun changePassword(data: ICredentials): Response<Unit> {
         return execute { Unit }
     }
 

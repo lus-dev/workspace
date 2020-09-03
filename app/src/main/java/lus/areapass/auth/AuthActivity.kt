@@ -9,7 +9,7 @@ import lus.areapass.auth.viewmodels.AuthenticationViewModel
 import lus.areapass.dashboard.DashboardActivity
 import lus.areapass.di.injector
 import lus.areapass.di.viewModel
-import lus.areapass.entities.person.User
+import lus.areapass.entities.network.IAccount
 
 
 class AuthActivity : BaseActivity<AuthenticationViewModel>() {
@@ -36,7 +36,7 @@ class AuthActivity : BaseActivity<AuthenticationViewModel>() {
         loadFragment(SignInFragment::class.java)
     }
 
-    private fun navigateToHome(user: User) {
+    private fun navigateToHome(user: IAccount) {
         viewModel.rememberUserLocally(user)
         DashboardActivity.navigate(this)
         finish()

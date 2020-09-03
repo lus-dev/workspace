@@ -12,11 +12,10 @@ import lus.areapass.entities.credentials.EmailCredentials
 import lus.areapass.entities.discount.IDiscount
 import lus.areapass.entities.discount.Promocode
 import lus.areapass.entities.discount.ZeroDiscount
+import lus.areapass.entities.network.IAccount
 import lus.areapass.entities.person.Contact
-import lus.areapass.entities.person.User
 import lus.areapass.network.ApiService
 import lus.areapass.network.Error
-import lus.areapass.network.PassApiService
 import lus.areapass.network.Success
 import java.util.*
 import javax.inject.Inject
@@ -27,7 +26,7 @@ class CreateAccountViewModel @Inject constructor(
     private val apiService: ApiService
 ) : BaseViewModel(appContext) {
 
-    val user: MutableLiveData<User> = MutableLiveData()
+    val user: MutableLiveData<IAccount> = MutableLiveData()
     val onSubmit: View.OnClickListener = View.OnClickListener { create() }
     val firstName: MutableLiveData<String> = MutableLiveData()
     val lastName: MutableLiveData<String> = MutableLiveData()

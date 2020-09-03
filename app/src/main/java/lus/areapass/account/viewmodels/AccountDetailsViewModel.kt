@@ -11,9 +11,9 @@ import lus.areapass.BaseViewModel
 import lus.areapass.R
 import lus.areapass.cache.UserPreferences
 import lus.areapass.cache.UserSavedState
+import lus.areapass.entities.network.IAccount
 import lus.areapass.entities.person.Contact
 import lus.areapass.entities.person.IContact
-import lus.areapass.entities.person.User
 import lus.areapass.network.ApiService
 import lus.areapass.network.Error
 import lus.areapass.network.Success
@@ -48,15 +48,13 @@ class AccountDetailsViewModel constructor(
     val onChangeSaved: MutableLiveData<Unit> = MutableLiveData()
 
     init {
-        val cachedUser = userPreferences.user()
         val savedStateUser = UserSavedState(savedState)
-        val user = if (savedStateUser.contains()) cachedUser.copy(contact = savedStateUser.contact()) else cachedUser
-
-        with(user.contact) {
-            this@AccountDetailsViewModel.firstName.value = firstName
-            this@AccountDetailsViewModel.lastName.value = lastName
-            this@AccountDetailsViewModel.username.value = username
-            this@AccountDetailsViewModel.email.value = email
+        val contact = if (savedStateUser.contains()) savedStateUser.contact() else userPreferences.contact()
+        with(this@AccountDetailsViewModel) {
+            firstName.value = contact.firstName
+            lastName.value = contact.lastName
+            username.value = contact.username
+            email.value = contact.email
         }
     }
 
@@ -65,8 +63,7 @@ class AccountDetailsViewModel constructor(
     }
 
     private fun contact(): IContact {
-        return Contact(firstName.value
-            ?: "", lastName.value ?: "", username.value ?: "", email.value ?: "")
+        return Contact(firstName.value ?: "", lastName.value ?: "", username.value ?: "", email.value ?: "")
     }
 
     private fun signOut() {
@@ -76,9 +73,8 @@ class AccountDetailsViewModel constructor(
 
     private fun saveChanges() {
         if (validate()) {
-            val user = User(-1, contact())
-            userPreferences.save(user)
-            updateAccount(user)
+            userPreferences.save(contact())
+            updateAccount(userPreferences.user())
         }
     }
 
@@ -91,7 +87,7 @@ class AccountDetailsViewModel constructor(
         ).all { info -> validate(info.first.value, info.second) }
     }
 
-    private fun updateAccount(data: User) {
+    private fun updateAccount(data: IAccount) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = apiService.updateAccount(data)) {
                 is Success -> onChangeSaved.postValue(Unit)

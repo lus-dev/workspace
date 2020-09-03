@@ -11,8 +11,8 @@ import lus.areapass.BaseViewModel
 import lus.areapass.R
 import lus.areapass.entities.credentials.EmailCredentials
 import lus.areapass.entities.credentials.ICredentials
-import lus.areapass.entities.person.User
 import lus.areapass.entities.credentials.UsernameCredentials
+import lus.areapass.entities.network.IAccount
 import lus.areapass.network.ApiService
 import lus.areapass.network.Error
 import lus.areapass.network.Success
@@ -24,7 +24,7 @@ class SignInViewModel @Inject constructor(
     private val apiService: ApiService
 ) : BaseViewModel(appContext) {
 
-    val user: MutableLiveData<User> = MutableLiveData()
+    val user: MutableLiveData<IAccount> = MutableLiveData()
     val onSignIn: View.OnClickListener = View.OnClickListener { signIn() }
     val identifier: MutableLiveData<String> = MutableLiveData()
     val password: MutableLiveData<String> = MutableLiveData()

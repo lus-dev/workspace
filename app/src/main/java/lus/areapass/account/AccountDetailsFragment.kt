@@ -15,15 +15,15 @@ import lus.areapass.notification.InfoDialog
 
 class AccountDetailsFragment : BaseFragment<AccountDetailsViewModel, ViewDataBinding>() {
 
-    private val navi by activityViewModel { injector.accountViewModel }
+    private val navigation by activityViewModel { injector.accountViewModel }
 
     override val viewModel by statefulViewModel {
         injector.accountDetailsViewModel
             .create(it)
             .apply {
-                onChangePassword.value = View.OnClickListener { navi.onChangePassword.value = Unit }
-                onShowSubscription.value = View.OnClickListener { navi.onShowSubscription.value = Unit }
-                onSignedOut.observe(this@AccountDetailsFragment, Observer { navi.onSignOut.value = Unit })
+                onChangePassword.value = View.OnClickListener { navigation.onChangePassword.value = Unit }
+                onShowSubscription.value = View.OnClickListener { navigation.onShowSubscription.value = Unit }
+                onSignedOut.observe(this@AccountDetailsFragment, Observer { navigation.onSignOut.value = Unit })
                 onChangeSaved.observe(this@AccountDetailsFragment, Observer { onChangeSaved() })
                 errors.observe(this@AccountDetailsFragment, Observer { onFailure(it) })
             }
@@ -33,7 +33,7 @@ class AccountDetailsFragment : BaseFragment<AccountDetailsViewModel, ViewDataBin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navi.showToolbar(title = getString(R.string.title_account))
+        navigation.showToolbar(title = getString(R.string.title_account))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

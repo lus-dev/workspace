@@ -1,10 +1,9 @@
 package lus.areapass.pass.viewmodels
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import lus.areapass.cache.UserPreferences
-import lus.areapass.entities.person.User
+import lus.areapass.entities.network.User
 import javax.inject.Inject
 
 
@@ -18,7 +17,5 @@ class PassRootViewModel @Inject constructor(
     override val onCreatePass: MutableLiveData<Unit> = MutableLiveData()
     override val onBack: MutableLiveData<Unit> = MutableLiveData()
     override val onRefreshUi: MutableLiveData<Unit> = MutableLiveData()
-
-    fun rememberUserLocally(data: User) = userPreferences.save(data)
 
 }

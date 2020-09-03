@@ -3,13 +3,10 @@ package lus.areapass.pass
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.databinding.Observable
 import androidx.lifecycle.Observer
 import lus.areapass.BaseActivity
-import lus.areapass.dashboard.DashboardActivity
 import lus.areapass.di.injector
 import lus.areapass.di.viewModel
-import lus.areapass.entities.person.User
 import lus.areapass.pass.viewmodels.PassRootViewModel
 
 

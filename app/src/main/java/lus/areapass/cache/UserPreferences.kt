@@ -2,8 +2,11 @@ package lus.areapass.cache
 
 import android.content.Context
 import android.content.SharedPreferences
+import lus.areapass.entities.credentials.IdCredentials
+import lus.areapass.entities.network.IAccount
 import lus.areapass.entities.person.Contact
-import lus.areapass.entities.person.User
+import lus.areapass.entities.person.IContact
+import lus.areapass.entities.network.User
 
 
 class UserPreferences constructor(appContext: Context) : ICachedUser {
@@ -17,37 +20,48 @@ class UserPreferences constructor(appContext: Context) : ICachedUser {
     private val preferences: SharedPreferences =
         appContext.getSharedPreferences("lus.areapass.preferences.user", Context.MODE_PRIVATE)
 
-    fun save(user: User) {
+    fun save(user: IAccount) {
+        save(user.contact)
         preferences.edit()
-            .putLong(keyFieldID, user.id)
-            .putString(keyFieldFirstName, user.contact.firstName)
-            .putString(keyFieldLastName, user.contact.lastName)
-            .putString(keyFieldUsername, user.contact.username)
-            .putString(keyFieldEmail, user.contact.email)
+            .putString(keyFieldID, user.credentials.identifier())
             .apply()
     }
 
-    fun user(): User {
-        return User(
-            preferences.getLong(keyFieldID, -1),
-            Contact(
-                preferences.getString(keyFieldFirstName, ""),
-                preferences.getString(keyFieldLastName, ""),
-                preferences.getString(keyFieldUsername, ""),
-                preferences.getString(keyFieldEmail, "")
+    fun save(contact: IContact) {
+        preferences.edit()
+            .putString(keyFieldFirstName, contact.firstName)
+            .putString(keyFieldLastName, contact.lastName)
+            .putString(keyFieldUsername, contact.username)
+            .putString(keyFieldEmail, contact.email)
+            .apply()
+    }
+
+    fun user(): IAccount {
+        with(preferences) {
+            return User(
+                Contact(
+                    getString(keyFieldFirstName, ""),
+                    getString(keyFieldLastName, ""),
+                    getString(keyFieldUsername, ""),
+                    getString(keyFieldEmail, "")),
+                IdCredentials(getString(keyFieldID, ""))
             )
-        )
+        }
     }
 
     fun unauthorize() = preferences.edit().clear().apply()
 
     fun authorized() = preferences.contains(keyFieldID)
 
-    override fun contact() = Contact(
-        preferences.getString(keyFieldFirstName, ""),
-        preferences.getString(keyFieldLastName, ""),
-        preferences.getString(keyFieldUsername, ""),
-        preferences.getString(keyFieldEmail, "")
-    )
+    override fun contact(): IContact {
+        with(preferences) {
+            return Contact(
+                getString(keyFieldFirstName, ""),
+                getString(keyFieldLastName, ""),
+                getString(keyFieldUsername, ""),
+                getString(keyFieldEmail, "")
+            )
+        }
+    }
 
 }
