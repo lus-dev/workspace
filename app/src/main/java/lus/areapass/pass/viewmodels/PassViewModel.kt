@@ -5,11 +5,11 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import lus.areapass.BaseViewModel
 import lus.areapass.R
-import lus.areapass.entities.Pass
 import lus.areapass.network.ApiService
-import java.util.*
+import javax.inject.Inject
 
-class PassViewModel constructor(
+
+class PassViewModel @Inject constructor(
     private val appContext: Context,
     private val apiService: ApiService
 ) : BaseViewModel(appContext) {

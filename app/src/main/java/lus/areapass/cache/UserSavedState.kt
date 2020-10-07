@@ -7,24 +7,13 @@ import lus.areapass.entities.person.IContact
 
 class UserSavedState constructor(private val state: SavedStateHandle): ICachedUser {
 
-    private val keyFieldFirstName = "firstName"
-    private val keyFieldLastName = "lastName"
-    private val keyFieldUsername = "username"
-    private val keyFieldEmail = "email"
+    private val keyStateContact = "contact"
 
     fun save(user: IContact) {
-        state.set(keyFieldFirstName, user.firstName)
-        state.set(keyFieldLastName, user.lastName)
-        state.set(keyFieldUsername, user.username)
-        state.set(keyFieldEmail, user.email)
+        state.set(keyStateContact, user)
     }
 
-     override fun contact(): IContact = Contact(
-         state.get(keyFieldFirstName) ?: "",
-         state.get(keyFieldLastName) ?: "",
-         state.get(keyFieldUsername) ?: "",
-         state.get(keyFieldEmail) ?: ""
-     )
+    override fun contact(): IContact = state.get<Contact>(keyStateContact)!!
 
     fun contains() = state.keys().isNotEmpty()
 
