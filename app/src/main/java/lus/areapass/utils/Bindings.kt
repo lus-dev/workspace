@@ -8,15 +8,15 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
 
-//object Bindings {
+object Bindings {
 
-//    @JvmStatic
+    @JvmStatic
     @BindingAdapter("visible")
     fun setVisibility(view: View, visible: Boolean) {
         view.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-//    @JvmStatic
+    @JvmStatic
     @BindingAdapter("background")
     fun setBackground(view: View, resId: Int) {
         if (resId != 0) {
@@ -24,15 +24,18 @@ import org.threeten.bp.format.DateTimeFormatter
         }
     }
 
-//    @JvmStatic
+    @JvmStatic
     @BindingAdapter("adapter")
-    fun setRecyclerAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>) {
-        view.adapter = adapter
+    fun setRecyclerAdapter(view: RecyclerView?, adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>?) {
+        // TODO Investigate why here might come smt NULL
+        if (adapter == null) return
+        view?.adapter = adapter
     }
 
+    @JvmStatic
     @BindingAdapter("dateText")
     fun formatDate(view: EditText, value: LocalDate) {
         value.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
     }
 
-//}
+}

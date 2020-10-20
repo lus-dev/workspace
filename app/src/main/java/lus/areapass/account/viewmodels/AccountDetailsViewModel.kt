@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 
 class AccountDetailsViewModel constructor(
-    private val appContext: Context,
+    private val appContext: Context, // TODO Remove
     private val apiService: ApiService,
     private val userPreferences: UserPreferences,
     private val savedState: SavedStateHandle
