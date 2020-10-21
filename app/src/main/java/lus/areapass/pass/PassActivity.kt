@@ -4,12 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import lus.areapass.BaseActivity
-import lus.areapass.di.injector
 import lus.areapass.di.viewModel
 import lus.areapass.pass.viewmodels.PassRootViewModel
 
 
+@AndroidEntryPoint
 class PassActivity : BaseActivity<PassRootViewModel>() {
 
     companion object {
@@ -19,8 +20,8 @@ class PassActivity : BaseActivity<PassRootViewModel>() {
         }
     }
 
-    override val viewModel by viewModel {
-        injector.passRootViewModel.apply {
+    override val viewModel by viewModel<PassRootViewModel> {
+        with(it) {
             onCreatePass.observe(this@PassActivity, Observer { onCreatePass() })
             onBack.observe(this@PassActivity, Observer { onBackPressed() })
             onRefreshUi.observe(this@PassActivity, Observer { binding.invalidateAll() })

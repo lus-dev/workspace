@@ -2,15 +2,16 @@ package lus.areapass.pass.viewmodels
 
 import android.content.Context
 import android.view.View
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.qualifiers.ApplicationContext
 import lus.areapass.BaseViewModel
 import lus.areapass.R
 import lus.areapass.network.ApiService
-import javax.inject.Inject
 
 
-class PassViewModel @Inject constructor(
-    private val appContext: Context,
+class PassViewModel @ViewModelInject constructor(
+    @ApplicationContext private val appContext: Context,
     private val apiService: ApiService
 ) : BaseViewModel(appContext) {
 

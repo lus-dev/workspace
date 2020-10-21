@@ -4,17 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import lus.areapass.BaseActivity
 import lus.areapass.R
 import lus.areapass.account.AccountActivity
 import lus.areapass.account.navigate
 import lus.areapass.auth.AuthActivity
 import lus.areapass.dashboard.viewmodels.DashboardViewModel
-import lus.areapass.di.injector
 import lus.areapass.di.viewModel
 import lus.areapass.pass.PassActivity
 
 
+@AndroidEntryPoint
 class DashboardActivity : BaseActivity<DashboardViewModel>() {
 
     companion object {
@@ -24,12 +25,11 @@ class DashboardActivity : BaseActivity<DashboardViewModel>() {
         }
     }
 
-    override val viewModel by viewModel {
-        injector.dashboardViewModel // .create(User())
-            .apply {
-                onViewAreas.observe(this@DashboardActivity, Observer { navigateToAreas() })
-                onViewAccount.observe(this@DashboardActivity, Observer { navigateToAccount() })
-            }
+    override val viewModel by viewModel<DashboardViewModel> {
+        with(it) {
+            onViewAreas.observe(this@DashboardActivity, Observer { navigateToAreas() })
+            onViewAccount.observe(this@DashboardActivity, Observer { navigateToAccount() })
+        }
     }
 
     override fun getLayoutId() = R.layout.activity_dashboard

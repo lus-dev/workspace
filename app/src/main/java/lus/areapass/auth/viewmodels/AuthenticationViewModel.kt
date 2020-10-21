@@ -1,13 +1,13 @@
 package lus.areapass.auth.viewmodels
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import lus.areapass.cache.UserPreferences
 import lus.areapass.entities.network.IAccount
-import javax.inject.Inject
 
 
-class AuthenticationViewModel @Inject constructor(
+class AuthenticationViewModel @ViewModelInject constructor(
     private val userPreferences: UserPreferences
 ) : AuthenticationNavigator, ViewModel() {
 

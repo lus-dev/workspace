@@ -3,22 +3,23 @@ package lus.areapass.pass
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import lus.areapass.BaseFragment
 import lus.areapass.R
-import lus.areapass.auth.viewmodels.CreateAccountViewModel
-import lus.areapass.di.activityViewModel
-import lus.areapass.di.injector
 import lus.areapass.di.viewModel
+import lus.areapass.pass.viewmodels.PassRootViewModel
 import lus.areapass.pass.viewmodels.PassViewModel
 
 
+@AndroidEntryPoint
 class CreatePassFragment : BaseFragment<PassViewModel, ViewDataBinding>() {
 
-    private val navi by activityViewModel { injector.authenticationViewModel }
+    private val navi by activityViewModels<PassRootViewModel>()
 
-    override val viewModel by viewModel {
-        injector.createPassViewModel.apply {
+    override val viewModel by viewModel<PassViewModel> {
+        with(it) {
             errors.observe(this@CreatePassFragment, Observer { onFailure(it) })
             onExpireDateSet.observe(this@CreatePassFragment, Observer { onExpireDateSet() })
         }

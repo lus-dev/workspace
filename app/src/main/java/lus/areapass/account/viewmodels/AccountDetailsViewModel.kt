@@ -2,9 +2,12 @@ package lus.areapass.account.viewmodels
 
 import android.content.Context
 import android.view.View
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lus.areapass.BaseViewModel
@@ -17,24 +20,14 @@ import lus.areapass.entities.person.IContact
 import lus.areapass.network.ApiService
 import lus.areapass.network.Error
 import lus.areapass.network.Success
-import javax.inject.Inject
 
 
-class AccountDetailsViewModel constructor(
-    private val appContext: Context, // TODO Remove
+class AccountDetailsViewModel @ViewModelInject constructor(
+    @ApplicationContext appContext: Context,
     private val apiService: ApiService,
     private val userPreferences: UserPreferences,
-    private val savedState: SavedStateHandle
+    @Assisted private val savedState: SavedStateHandle
 ) : BaseViewModel(appContext) {
-
-    class Factory @Inject constructor(
-        private val appContext: Context,
-        private val apiService: ApiService,
-        private val userPreferences: UserPreferences
-    ) {
-        fun create(state: SavedStateHandle) =
-            AccountDetailsViewModel(appContext, apiService, userPreferences, state)
-    }
 
     val onSaveChanges: View.OnClickListener = View.OnClickListener { saveChanges() }
     val onSignOut: View.OnClickListener = View.OnClickListener { signOut() }

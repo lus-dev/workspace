@@ -1,18 +1,19 @@
 package lus.areapass.dashboard.viewmodels
 
 import android.content.Context
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import dagger.hilt.android.qualifiers.ApplicationContext
 import lus.areapass.BuildConfig
 import lus.areapass.R
 import lus.areapass.cache.UserPreferences
 import lus.areapass.dashboard.DashboardNavigator
 import lus.areapass.entities.network.IAccount
 import lus.areapass.network.ApiService
-import javax.inject.Inject
 
 
-class DashboardViewModel @Inject constructor( // @AssistedInject
-    private val appContext: Context,
+class DashboardViewModel @ViewModelInject constructor( // @AssistedInject
+    @ApplicationContext private val appContext: Context,
     private val apiService: ApiService,
     private val userPreferences: UserPreferences
 //    @Assisted val user: User
