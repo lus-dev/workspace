@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import lus.areapass.BaseActivity
 import lus.areapass.account.viewmodels.AccountViewModel
-import lus.areapass.di.injector
 import lus.areapass.di.viewModel
 
 
@@ -15,13 +15,14 @@ fun AccountActivity.Companion.navigate(context: Context) {
     context.startActivity(intent)
 }
 
+@AndroidEntryPoint
 class AccountActivity : BaseActivity<AccountViewModel>() {
     companion object;
 
-    override val viewModel by viewModel {
-        injector.accountViewModel.apply {
+    override val viewModel by viewModel<AccountViewModel> {
+        with(it) {
             onChangePassword.observe(this@AccountActivity, Observer { onChangePassword() })
-            onShowSubscription.observe(this@AccountActivity, Observer {  })
+            onShowSubscription.observe(this@AccountActivity, Observer { })
             onSignOut.observe(this@AccountActivity, Observer { onSignOut() })
             onBack.observe(this@AccountActivity, Observer { onBackPressed() })
             onRefreshUi.observe(this@AccountActivity, Observer { binding.invalidateAll() })

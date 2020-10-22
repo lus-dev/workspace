@@ -1,13 +1,12 @@
 package lus.areapass.pass.viewmodels
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import lus.areapass.cache.UserPreferences
-import lus.areapass.entities.network.User
-import javax.inject.Inject
 
 
-class PassRootViewModel @Inject constructor(
+class PassRootViewModel @ViewModelInject constructor(
     private val userPreferences: UserPreferences
 ) : PassNavigation, ViewModel() {
 

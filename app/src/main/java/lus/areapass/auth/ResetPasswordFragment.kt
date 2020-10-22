@@ -3,21 +3,23 @@ package lus.areapass.auth
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import lus.areapass.BaseFragment
 import lus.areapass.R
+import lus.areapass.auth.viewmodels.AuthenticationViewModel
 import lus.areapass.auth.viewmodels.ResetPasswordViewModel
-import lus.areapass.di.activityViewModel
-import lus.areapass.di.injector
 import lus.areapass.di.viewModel
 
 
+@AndroidEntryPoint
 class ResetPasswordFragment : BaseFragment<ResetPasswordViewModel, ViewDataBinding>() {
 
-    private val navigation by activityViewModel { injector.authenticationViewModel }
+    private val navigation by activityViewModels<AuthenticationViewModel>()
 
-    override val viewModel by viewModel {
-        injector.resetPasswordViewModel.apply {
+    override val viewModel by viewModel<ResetPasswordViewModel> {
+        with(it) {
             onSuccess.observe(this@ResetPasswordFragment, Observer { navigation.onBack.value = Unit })
             errors.observe(this@ResetPasswordFragment, Observer { onFailure(it) })
         }

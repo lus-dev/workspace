@@ -2,11 +2,14 @@ package lus.areapass.di.modules
 
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import lus.areapass.network.ApiService
 import lus.areapass.network.RetrofittableApiService
 
 
-@Module(includes = [NetworkModule::class])
+@InstallIn(ApplicationComponent::class)
+@Module
 interface ApiServiceModule {
 
     @Binds

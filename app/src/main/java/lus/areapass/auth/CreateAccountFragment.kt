@@ -3,21 +3,23 @@ package lus.areapass.auth
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import lus.areapass.BaseFragment
 import lus.areapass.R
+import lus.areapass.auth.viewmodels.AuthenticationViewModel
 import lus.areapass.auth.viewmodels.CreateAccountViewModel
-import lus.areapass.di.activityViewModel
-import lus.areapass.di.injector
 import lus.areapass.di.viewModel
 
 
+@AndroidEntryPoint
 class CreateAccountFragment : BaseFragment<CreateAccountViewModel, ViewDataBinding>() {
 
-    private val navigation by activityViewModel { injector.authenticationViewModel }
+    private val navigation by activityViewModels<AuthenticationViewModel>()
 
-    override val viewModel by viewModel {
-        injector.createAccountViewModel.apply {
+    override val viewModel by viewModel<CreateAccountViewModel> {
+        with(it) {
             user.observe(this@CreateAccountFragment, Observer { navigation.onSignIn.value = it })
             errors.observe(this@CreateAccountFragment, Observer { onFailure(it) })
             usePromoCode.observe(this@CreateAccountFragment, Observer { binding.invalidateAll() })

@@ -3,8 +3,10 @@ package lus.areapass.auth.viewmodels
 import android.content.Context
 import android.util.Patterns
 import android.view.View
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lus.areapass.BaseViewModel
@@ -16,11 +18,10 @@ import lus.areapass.entities.network.IAccount
 import lus.areapass.network.ApiService
 import lus.areapass.network.Error
 import lus.areapass.network.Success
-import javax.inject.Inject
 
 
-class SignInViewModel @Inject constructor(
-    private val appContext: Context,
+class SignInViewModel @ViewModelInject constructor(
+    @ApplicationContext private val appContext: Context,
     private val apiService: ApiService
 ) : BaseViewModel(appContext) {
 

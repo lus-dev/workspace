@@ -1,11 +1,11 @@
 package lus.areapass.account.viewmodels
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import javax.inject.Inject
 
 
-class AccountViewModel @Inject constructor() : AccountNavigator, ViewModel() {
+class AccountViewModel @ViewModelInject constructor() : AccountNavigator, ViewModel() {
 
     override val title: MutableLiveData<String> = MutableLiveData()
     override val showToolbar: MutableLiveData<Boolean> = MutableLiveData()
