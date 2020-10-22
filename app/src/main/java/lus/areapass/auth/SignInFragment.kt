@@ -34,10 +34,4 @@ class SignInFragment : BaseFragment<SignInViewModel, ViewDataBinding>() {
         navigation.hideToolbar()
     }
 
-//    @InstallIn(ApplicationComponent::class)
-//    @EntryPoint
-//    interface RegistrationEntryPoint {
-//        fun registrationComponent(): RegistrationComponent.Factory
-//    }
-
 }
